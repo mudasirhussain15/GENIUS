@@ -1,0 +1,176 @@
+  body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0b0e;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(26, 29, 41, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15);
+        }
+        /* Subtle gold glow text */
+        .gold-glow {
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+        /* Particle canvas styling */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        /* Book turning animation styles */
+        .book-page {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+        /* --- Developed by Mudasir Animation Ticker --- */
+.mudasir-ticker-wrapper {
+  background: linear-gradient(90deg, rgba(20, 20, 24, 0.95), rgba(30, 25, 15, 0.95));
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.mudasir-ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: tickerLoop 25s linear infinite;
+}
+
+.mudasir-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: #d4af37;
+  text-transform: uppercase;
+  padding: 0 30px;
+}
+
+.mudasir-ticker-item i {
+  color: #fff;
+  margin-right: 12px;
+  animation: pulseIcon 2s ease-in-out infinite;
+}
+
+/* Continuous Marquee Ticker Keyframes */
+@keyframes tickerLoop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Glowing Pulse Effect for Icon */
+@keyframes pulseIcon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    text-shadow: 0 0 10px #d4af37;
+  }
+}
+
+/* Pause animation on hover */
+.mudasir-ticker-wrapper:hover .mudasir-ticker-track {
+  animation-play-state: paused;
+}
+/* --- Custom Attractive Golden Cursor --- */
+/* Hide default cursor on desktop */
+@media (min-width: 768px) {
+  body, a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
+  }
+}
+
+/* Custom Cursor Inner Dot */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #d4af37;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  box-shadow: 0 0 10px #d4af37;
+}
+
+/* Custom Cursor Outer Glowing Ring */
+.custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  background: rgba(212, 175, 55, 0.03);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Hover effect when hovering over links, buttons or interactive elements */
+body.cursor-hover .custom-cursor {
+  transform: translate(-50%, -50%) scale(0.5);
+  background-color: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+
+body.cursor-hover .custom-cursor-follower {
+  width: 55px;
+  height: 55px;
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Click animation effect */
+body.cursor-click .custom-cursor-follower {
+  transform: translate(-50%, -50%) scale(0.85);
+  background-color: rgba(212, 175, 55, 0.25);
+}

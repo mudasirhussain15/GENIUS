@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles of Genius — Digital History Library of Great Thinkers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            900: '#78350f',
+                            950: '#451a03'
+                        },
+                        dark: {
+                            900: '#0a0b0e',
+                            800: '#12141c',
+                            700: '#1a1d29',
+                            600: '#262a3a'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Cinzel for cinematic museum feel & Plus Jakarta Sans for ultra-modern readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark-900 text-gray-100 antialiased selection:bg-amber-500 selection:text-dark-900">
+
+    <!-- Sticky Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-panel border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-600/20 group-hover:scale-105 transition-transform">
+                    <i class="fas fa-landmark text-dark-900 text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-cinzel tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">CHRONICLES OF GENIUS</span>
+                    <span class="block text-[10px] uppercase tracking-widest text-amber-500/80 font-medium">Digital History Library</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" class="nav-link text-amber-400 hover:text-amber-300 transition-colors">Home</a>
+                <a href="#library" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">Scientists</a>
+                <a href="#timeline-section" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">Timeline</a>
+                <a href="#discoveries" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">Discoveries</a>
+                <a href="#quiz-section" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">Find Your Mind</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">About</a>
+                <a href="#feedback" class="nav-link text-gray-300 hover:text-amber-400 transition-colors">Feedback</a>
+            </nav>
+
+            <!-- Quick Action / Bookmarks Drawer Toggle -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button id="open-bookmarks-btn" class="relative p-2.5 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 transition-colors" title="Saved Bookmarks">
+                    <i class="fas fa-bookmark"></i>
+                    <span id="bookmark-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-dark-900 text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+                <a href="#library" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-dark-900 font-semibold font-cinzel text-sm shadow-lg shadow-amber-600/30 hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Explore Library
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-amber-500/10 px-6 py-6 space-y-4">
+            <a href="#home" class="mobile-link block text-amber-400 font-medium py-1">Home</a>
+            <a href="#library" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">Scientists</a>
+            <a href="#timeline-section" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">Timeline</a>
+            <a href="#discoveries" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">Discoveries</a>
+            <a href="#quiz-section" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">Find Your Mind</a>
+            <a href="#about" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">About</a>
+            <a href="#feedback" class="mobile-link block text-gray-300 hover:text-amber-400 font-medium py-1">Feedback</a>
+            <div class="pt-2 flex items-center justify-between border-t border-amber-500/10">
+                <button id="mobile-bookmarks-btn" class="flex items-center space-x-2 text-amber-400 font-medium">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Saved Bookmarks (<span id="mobile-bookmark-count">0</span>)</span>
+                </button>
+            </div>
+        </div>
+        <!-- Developed by Mudasir Ticker Bar -->
+<div class="mudasir-ticker-wrapper">
+  <div class="mudasir-ticker-track">
+    <!-- First set -->
+    <span class="mudasir-ticker-item"><i class="fas fa-code"></i> Developed by Mudasir</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-star"></i> Chronicles of Genius</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-code"></i> Developed by Mudasir</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-star"></i> Chronicles of Genius</span>
+    <!-- Duplicate set for seamless looping -->
+    <span class="mudasir-ticker-item"><i class="fas fa-code"></i> Developed by Mudasir</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-star"></i> Chronicles of Genius</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-code"></i> Developed by Mudasir</span>
+    <span class="mudasir-ticker-item"><i class="fas fa-star"></i> Chronicles of Genius</span>
+  </div>
+</div>
+    </header>
+
+    <!-- Cinematic Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900">
+        <canvas id="particle-canvas"></canvas>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-medium mb-8 animate-pulse">
+                <i class="fas fa-compass"></i>
+                <span>An Immersive Digital History Museum & Library</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-cinzel tracking-tight text-white mb-6 leading-tight">
+                Explore the Minds That <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-amber-600 gold-glow">Changed the World</span>
+            </h1>
+
+            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 leading-relaxed font-light">
+                Discover the stories, discoveries, inventions and ideas of the visionary scientists, thinkers, and polymaths who shaped human civilization across millennia.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#library" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-dark-900 font-bold font-cinzel shadow-xl shadow-amber-600/30 hover:shadow-amber-600/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center space-x-3">
+                    <i class="fas fa-book-open"></i>
+                    <span>Explore Scientists</span>
+                </a>
+                <a href="#timeline-section" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-amber-400 font-bold font-cinzel border border-amber-500/30 hover:bg-amber-500/10 hover:scale-105 active:scale-95 transition-all flex items-center justify-center space-x-3">
+                    <i class="fas fa-history"></i>
+                    <span>Start the Journey</span>
+                </a>
+            </div>
+
+            <!-- Quick Stats Bar -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="glass-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-cinzel text-amber-400 mb-1">25</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Master Thinkers</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-cinzel text-amber-400 mb-1">6+</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Eras of History</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-cinzel text-amber-400 mb-1">150</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Immersive Chapters</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-cinzel text-amber-400 mb-1">100%</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Verified Facts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Did You Know? Interactive Section -->
+    <section class="py-16 bg-dark-800/50 border-y border-amber-500/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block p-3 rounded-2xl glass-panel text-amber-400 mb-4 shadow-lg">
+                <i class="fas fa-lightbulb text-2xl"></i>
+            </div>
+            <h2 class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-2">Historical Insights</h2>
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl relative overflow-hidden my-6">
+                <div class="absolute -right-10 -bottom-10 text-amber-500/5 text-9xl font-cinzel pointer-events-none">?</div>
+                <p id="fact-text" class="text-lg sm:text-xl font-medium text-gray-200 italic mb-6 leading-relaxed">
+                    “Some scientific ideas that seem obvious today took centuries of relentless struggle and debate to develop.”
+                </p>
+                <button id="next-fact-btn" class="px-6 py-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-sm font-semibold transition-all inline-flex items-center space-x-2">
+                    <i class="fas fa-random"></i>
+                    <span>Reveal Another Fact</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientists Library Section -->
+    <section id="library" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-extrabold font-cinzel text-white mb-4">The Hall of Genius</h2>
+            <p class="text-gray-400 text-base sm:text-lg">Explore verified biographical records, breakthroughs, and profound legacies of history's greatest minds.</p>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="space-y-6 mb-12">
+            <!-- Search Bar -->
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-amber-500">
+                    <i class="fas fa-search"></i>
+                </div>
+                <input type="text" id="scientist-search" placeholder="Search a scientist by name, field, or country..." class="w-full pl-12 pr-4 py-4 rounded-2xl glass-panel text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 transition-all text-sm sm:text-base">
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div id="category-filters" class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                <button data-category="All" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-500 text-dark-900 shadow-md">All Fields</button>
+                <button data-category="Physics" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Physics</button>
+                <button data-category="Mathematics" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Mathematics</button>
+                <button data-category="Chemistry" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Chemistry</button>
+                <button data-category="Computer" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Computer</button>
+                <button data-category="Astronomy" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Astronomy</button>
+                <button data-category="Biology" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Biology</button>
+                <button data-category="Medicine" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Medicine</button>
+                <button data-category="Engineering" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Engineering</button>
+                <button data-category="Invention" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-gray-300 hover:text-amber-400">Invention</button>
+            </div>
+        </div>
+
+        <!-- Scientists Grid Container -->
+        <div id="scientists-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Populated Dynamically via JavaScript -->
+        </div>
+
+        <!-- No Results State -->
+        <div id="no-results" class="hidden text-center py-20">
+            <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center mx-auto mb-4 text-amber-500 text-2xl">
+                <i class="fas fa-search-minus"></i>
+            </div>
+            <h3 class="text-xl font-cinzel text-white mb-2">No scientists found</h3>
+            <p class="text-gray-400 text-sm">Try adjusting your search terms or selecting a different category filter.</p>
+        </div>
+    </section>
+
+    <!-- Global Historical Timeline Section -->
+    <section id="timeline-section" class="py-24 bg-dark-800/40 border-y border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-5xl font-extrabold font-cinzel text-white mb-4">Chronicles of Eras</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Trace the evolution of human knowledge across grand historical epochs.</p>
+            </div>
+
+            <!-- Era Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button data-era="all" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all bg-amber-500 text-dark-900 shadow-md">All Eras</button>
+                <button data-era="ancient" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all glass-panel text-gray-300 hover:text-amber-400">Ancient Era</button>
+                <button data-era="renaissance" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all glass-panel text-gray-300 hover:text-amber-400">Renaissance</button>
+                <button data-era="scientific-revolution" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all glass-panel text-gray-300 hover:text-amber-400">Scientific Revolution</button>
+                <button data-era="industrial-age" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all glass-panel text-gray-300 hover:text-amber-400">Industrial Age</button>
+                <button data-era="modern-science" class="era-tab px-5 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-bold transition-all glass-panel text-gray-300 hover:text-amber-400">Modern Science</button>
+            </div>
+
+            <!-- Timeline Stream -->
+            <div class="relative border-l-2 border-amber-500/30 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12" id="global-timeline-container">
+                <!-- Dynamically populated timeline items -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Famous Discoveries Section -->
+    <section id="discoveries" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-extrabold font-cinzel text-white mb-4">Pivotal Discoveries</h2>
+            <p class="text-gray-400 text-base sm:text-lg">Breakthroughs and inventions that permanently shifted the paradigm of human reality.</p>
+        </div>
+
+        <div id="discoveries-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamically populated discoveries -->
+        </div>
+    </section>
+
+    <!-- Interactive "Choose Your Mind" Quiz Section -->
+    <section id="quiz-section" class="py-24 bg-dark-800/50 border-y border-amber-500/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-2 block">Interactive Guide</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-cinzel text-white mb-3">What kind of mind are you interested in?</h2>
+                    <p class="text-gray-400 text-sm sm:text-base">Select a domain to discover the historical figures who pioneered that realm.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8" id="quiz-options">
+                    <button data-domain="Physics" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-atom text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Physics</span>
+                    </button>
+                    <button data-domain="Computer" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-laptop-code text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Computer Science</span>
+                    </button>
+                    <button data-domain="Mathematics" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-square-root-variable text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Mathematics</span>
+                    </button>
+                    <button data-domain="Chemistry" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-flask text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Chemistry</span>
+                    </button>
+                    <button data-domain="Space" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-globe text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Space & Cosmos</span>
+                    </button>
+                    <button data-domain="Medicine" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-heart-pulse text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Medicine & Biology</span>
+                    </button>
+                    <button data-domain="Invention" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group">
+                        <i class="fas fa-lightbulb text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">Inventions</span>
+                    </button>
+                    <button data-domain="All" class="quiz-btn p-4 rounded-2xl glass-panel text-center hover:border-amber-500 transition-all group active">
+                        <i class="fas fa-star text-amber-400 text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block font-semibold text-sm text-gray-200">All Minds</span>
+                    </button>
+                </div>
+
+                <!-- Quiz Results Area -->
+                <div id="quiz-results" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Dynamically populated recommendations -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verified Quotations Section -->
+    <section class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-extrabold font-cinzel text-white mb-4">Words of Wisdom</h2>
+            <p class="text-gray-400 text-base sm:text-lg">Profound reflections from history's most brilliant minds.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="quotes-grid">
+            <!-- Dynamically populated quotes -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark-800/40 border-y border-amber-500/10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-14 rounded-3xl relative overflow-hidden">
+                <div class="max-w-3xl mx-auto text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-6 text-amber-400 text-2xl">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold font-cinzel text-white mb-6">About Chronicles of Genius</h2>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+                        “Chronicles of Genius is an educational digital museum created to preserve, celebrate, and explore the stories of the remarkable people whose ideas transformed human understanding. We bridge the gap between rigorous historical archive and modern immersive web design to inspire the next generation of thinkers.”
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-amber-500/10 text-left">
+                        <div class="glass-panel p-5 rounded-2xl">
+                            <i class="fas fa-shield-alt text-amber-400 text-xl mb-3"></i>
+                            <h3 class="font-cinzel font-bold text-white mb-1">Historically Accurate</h3>
+                            <p class="text-xs text-gray-400">Rigorously researched biographical records with verified historical achievements.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl">
+                            <i class="fas fa-book text-amber-400 text-xl mb-3"></i>
+                            <h3 class="font-cinzel font-bold text-white mb-1">Immersive Reader</h3>
+                            <p class="text-xs text-gray-400">Chapter-based digital history books designed for deep exploration and storytelling.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl">
+                            <i class="fas fa-graduation-cap text-amber-400 text-xl mb-3"></i>
+                            <h3 class="font-cinzel font-bold text-white mb-1">Open Education</h3>
+                            <p class="text-xs text-gray-400">Accessible anywhere on any device to foster global curiosity and learning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-extrabold font-cinzel text-white mb-4">Share Your Feedback</h2>
+            <p class="text-gray-400 text-base sm:text-lg">Help us improve this digital museum with your thoughts, suggestions, or corrections.</p>
+        </div>
+
+        <div class="glass-panel p-8 sm:p-12 rounded-3xl relative">
+            <form id="feedback-form" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">Your Name</label>
+                        <input type="text" id="feedback-name" required placeholder="e.g., Ada Lovelace" class="w-full px-4 py-3.5 rounded-xl glass-panel text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">Your Email</label>
+                        <input type="email" id="feedback-email" required placeholder="ada@example.com" class="w-full px-4 py-3.5 rounded-xl glass-panel text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition-all text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">Rating Experience</label>
+                    <div id="star-rating" class="flex items-center space-x-2 text-2xl text-gray-600 cursor-pointer">
+                        <i class="fas fa-star rating-star transition-colors" data-value="1"></i>
+                        <i class="fas fa-star rating-star transition-colors" data-value="2"></i>
+                        <i class="fas fa-star rating-star transition-colors" data-value="3"></i>
+                        <i class="fas fa-star rating-star transition-colors" data-value="4"></i>
+                        <i class="fas fa-star rating-star transition-colors" data-value="5"></i>
+                        <span id="rating-label" class="text-xs font-medium text-gray-400 ml-3">Select rating</span>
+                    </div>
+                    <input type="hidden" id="feedback-rating" value="5">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">Your Feedback / Suggestion</label>
+                    <textarea id="feedback-message" required rows="4" placeholder="Share your experience exploring Chronicles of Genius..." class="w-full px-4 py-3.5 rounded-xl glass-panel text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition-all text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-dark-900 font-bold font-cinzel shadow-xl shadow-amber-600/30 hover:shadow-amber-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Submit Feedback</span>
+                </button>
+            </form>
+
+            <!-- Success Confirmation State -->
+            <div id="feedback-success" class="hidden text-center py-12">
+                <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-amber-500/40 animate-bounce">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-cinzel font-bold text-white mb-2">Thank You!</h3>
+                <p class="text-gray-300 text-sm mb-6">Your feedback has been successfully recorded in our local archives.</p>
+                <button id="reset-feedback-btn" class="px-6 py-2.5 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 text-xs font-semibold transition-all">Submit Another</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-amber-500/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-dark-900">
+                    <i class="fas fa-landmark text-sm"></i>
+                </div>
+                <span class="font-cinzel font-bold text-white tracking-wider">CHRONICLES OF GENIUS</span>
+            </div>
+            <p class="text-xs text-gray-500 text-center">© 2026 Chronicles of Genius Digital Library. All historical records researched and curated for educational enlightenment.</p>
+            <div class="flex items-center space-x-4 text-gray-400 text-sm">
+                <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
+                <a href="#library" class="hover:text-amber-400 transition-colors">Library</a>
+                <a href="#timeline-section" class="hover:text-amber-400 transition-colors">Timeline</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- IMMERSIVE DIGITAL BOOK READER MODAL -->
+    <div id="biography-modal" class="fixed inset-0 z-50 hidden bg-dark-900/90 backdrop-blur-xl overflow-y-auto">
+        <div class="min-h-screen px-4 py-8 sm:py-16 flex items-center justify-center">
+            <div class="relative w-full max-w-4xl glass-panel rounded-3xl border border-amber-500/30 shadow-2xl overflow-hidden book-page">
+                
+                <!-- Modal Top Navigation Header -->
+                <div class="flex items-center justify-between px-6 sm:px-10 py-5 border-b border-amber-500/20 bg-dark-800/80 sticky top-0 z-20">
+                    <div class="flex items-center space-x-3">
+                        <button id="close-modal-btn" class="p-2 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 transition-colors">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div>
+                            <span id="reader-scientist-subtitle" class="text-[10px] uppercase tracking-widest text-amber-500 font-bold block">Digital History Book</span>
+                            <h3 id="reader-scientist-name" class="text-lg sm:text-xl font-cinzel font-bold text-white">Scientist Name</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="modal-bookmark-btn" class="px-4 py-2 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 text-xs font-semibold transition-all flex items-center space-x-2">
+                            <i class="far fa-bookmark" id="modal-bookmark-icon"></i>
+                            <span id="modal-bookmark-text">Bookmark</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reading Progress Bar -->
+                <div class="w-full bg-dark-900 h-1">
+                    <div id="reading-progress-bar" class="bg-amber-500 h-1 w-0 transition-all duration-300"></div>
+                </div>
+
+                <!-- Book Body Content -->
+                <div class="p-6 sm:p-12 space-y-8" id="book-content-container">
+                    <!-- Populated dynamically per chapter -->
+                </div>
+
+                <!-- Modal Bottom Chapter Controls -->
+                <div class="px-6 sm:px-12 py-6 border-t border-amber-500/20 bg-dark-800/80 flex items-center justify-between sticky bottom-0 z-20">
+                    <button id="prev-chapter-btn" class="px-5 py-2.5 rounded-xl glass-panel text-amber-400 hover:bg-amber-500/10 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition-all">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Previous Chapter</span>
+                    </button>
+                    <span id="chapter-indicator-text" class="text-xs uppercase tracking-widest text-amber-500/90 font-cinzel font-bold">Chapter 1 of 6</span>
+                    <button id="next-chapter-btn" class="px-5 py-2.5 rounded-xl bg-amber-500 text-dark-900 hover:bg-amber-400 font-bold font-cinzel text-xs sm:text-sm flex items-center space-x-2 transition-all shadow-md">
+                        <span>Next Chapter</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKMARKS DRAWER MODAL -->
+    <div id="bookmarks-modal" class="fixed inset-0 z-50 hidden bg-dark-900/80 backdrop-blur-md flex justify-end">
+        <div class="w-full max-w-md h-full glass-panel border-l border-amber-500/30 p-6 flex flex-col justify-between overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-amber-500/20 mb-6">
+                    <div class="flex items-center space-x-2 text-amber-400 font-cinzel font-bold text-lg">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Saved Bookmarks</span>
+                    </div>
+                    <button id="close-bookmarks-drawer" class="p-2 rounded-xl text-gray-400 hover:text-white">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div id="bookmarks-list" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+            <div class="pt-4 border-t border-amber-500/20 text-center text-xs text-gray-500">
+                Bookmarks are saved locally in your browser storage.
+            </div>
+        </div>
+    </div>
+    <!-- Custom Interactive Cursor Elements -->
+<div class="custom-cursor"></div>
+<div class="custom-cursor-follower"></div>
+
+    
+    <script src="script.js">
+  
+    </script>
+</body>
+</html>
